@@ -1,6 +1,6 @@
-# Harmful Prompt 生成：Airflow 流程設計（草案）
+# Harmful Prompt 生成：Airflow 流程設計
 
-日期：2026-09-22　狀態：**待 mentor 確認，確認前不寫 code**
+日期：2026-09-22　狀態：**待 mentor 確認**
 
 ---
 
