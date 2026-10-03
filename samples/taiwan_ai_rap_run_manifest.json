@@ -1,0 +1,52 @@
+{
+  "run_id": "20260830_195826",
+  "generated_at": "2026-08-30T20:00:10.425830+00:00",
+  "config": {
+    "policy_file": "/home/ubuntu/airflow-datagen-harmful-prompt/configs/policies/taiwan_ai_rap.jsonl",
+    "domain": "TAIWAN AI RAP 客服",
+    "total": 180,
+    "policy_ids": [],
+    "language": "Traditional Chinese (Taiwan)",
+    "severity_ratio": {
+      "low": 0.3,
+      "medium": 0.4,
+      "high": 0.3
+    },
+    "aux_documents": [
+      "/home/ubuntu/airflow-datagen-harmful-prompt/configs/aux/rap_service_overview.md"
+    ],
+    "aux_char_budget": 6000,
+    "model": "Mistral-Large-3-675B-Instruct-2512",
+    "base_url": "https://your-openai-compatible-endpoint/v1",
+    "temperature": 1.0,
+    "max_tokens": 4096,
+    "max_prompts_per_call": 5,
+    "concurrency": 4,
+    "max_retries": 3,
+    "timeout": 300,
+    "output_dir": "/home/ubuntu/airflow-datagen-harmful-prompt/dataset",
+    "run_id": null
+  },
+  "policy_file_sha256": "9cc0c95c60faf8c2c724384521055022d329eb4997dbdb9c9bc8f9a824d914ed",
+  "aux_document_sha256": {
+    "/home/ubuntu/airflow-datagen-harmful-prompt/configs/aux/rap_service_overview.md": "50bc5419d3dc5eb9b77cfe76e780b170162866e65b07d4063afa5aa7b00ec073"
+  },
+  "requested": 180,
+  "produced": 180,
+  "api_calls": 39,
+  "failures": 0,
+  "parse_strategies": {
+    "json_salvaged": 7,
+    "json_fence": 32
+  },
+  "by_severity": {
+    "low": 54,
+    "medium": 72,
+    "high": 54
+  },
+  "by_policy": {
+    "A1": 60,
+    "A2": 60,
+    "A3": 60
+  }
+}

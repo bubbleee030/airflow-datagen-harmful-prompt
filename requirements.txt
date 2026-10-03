@@ -1,0 +1,4 @@
+openai==2.24.0
+fire==0.7.1
+PyYAML>=5.4
+tqdm==4.67.1

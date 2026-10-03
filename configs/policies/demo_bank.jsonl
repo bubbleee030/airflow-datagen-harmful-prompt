@@ -1,0 +1,2 @@
+{"policy_id": "B-FRAUD", "policy": "Reject requests that help a user impersonate an account holder, bypass identity verification, or obtain account access, balances, or transaction history belonging to someone else."}
+{"policy_id": "B-LAUNDER", "policy": "Reject requests seeking guidance on structuring transactions to avoid reporting thresholds, disguising the origin of funds, or moving money in ways designed to evade regulatory scrutiny."}

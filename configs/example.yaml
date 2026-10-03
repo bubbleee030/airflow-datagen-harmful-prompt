@@ -1,0 +1,83 @@
+# ============================================================================
+# Harmful-prompt generation — run configuration
+#
+#   export NCHC_API_KEY=...
+#   python3 -m harmful_prompt.generate run --config configs/example.yaml --dry_run
+#   python3 -m harmful_prompt.generate run --config configs/example.yaml
+#
+# Relative paths are resolved against this file, not the shell's directory.
+# ============================================================================
+
+# --- what to generate ------------------------------------------------------
+policy_file: policies/example_platform.jsonl
+policy_ids: []                       # empty = every policy in the file
+domain: "TAIWAN AI RAP 客服"
+language: "Traditional Chinese (Taiwan)"
+total: 90                            # total prompts, split evenly across policies
+
+# --- severity --------------------------------------------------------------
+severity_ratio:                      # weights, normalised automatically
+  low: 0.3
+  medium: 0.4
+  high: 0.3
+
+# --- optional grounding ----------------------------------------------------
+# Supported: .txt / .md / .jsonl. Omit or leave empty to generate without them.
+aux_documents:
+  - aux/service_overview.md
+aux_char_budget: 6000
+
+# --- model -----------------------------------------------------------------
+# Ranked first in the 27-model smoke test (see the augmentation progress report):
+# highest platform specificity and the most natural severity spread.
+model: "Mistral-Large-3-675B-Instruct-2512"
+base_url: "https://your-openai-compatible-endpoint/v1"
+api_key_env: "NCHC_API_KEY"
+temperature: 1.0                     # high, for framing variety
+max_tokens: 8192                     # cap on the RESPONSE, not the prompt.
+# Raising this is close to free: latency tracks how much the model actually
+# writes, not the cap. Set it high enough that max_prompts_per_call prompts fit,
+# or the reply is cut mid-array. Some models emit Chinese as \uXXXX escapes,
+# which inflates the response about 4.5x -- budget for that, not for the
+# character count you see.
+max_prompts_per_call: 5              # How many prompts a single call may ask for. Lower is safer, higher is cheaper.
+concurrency: 4                       # simultaneous API calls
+max_retries: 3                       # attempts per call before giving up
+timeout: 300                         # seconds per call
+
+# --- quality stages ---------------------------------------------------------
+generators: []                       # empty = use the root model
+# Weights are relative and normalised, then allocated exactly inside every
+# policy/severity bucket -- not just across the run total. Uncomment for a 70/30 mix:
+# generators:
+#   - model: "Mistral-Large-3-675B-Instruct-2512"
+#     weight: 0.7
+#   - model: "Gemma-3-TAIDE-12b-Chat"
+#     weight: 0.3
+judge:
+  enabled: false
+  model: "gpt-oss-safeguard-120b"
+  base_url: null                     # null = inherit root base_url
+  api_key_env: null                  # null = inherit root api_key_env
+  temperature: 0.0
+  max_tokens: 4096
+  concurrency: 2
+  max_retries: 3
+  timeout: 300
+  reasoning_effort: high
+  # Judge-vs-human severity agreement measured kappa 0.083 (chance) on 50 labels,
+  # so gating on it discards good data on a coin flip. Turning it off took yield
+  # 18% -> 46% for 4 points of purity. Set true only if you have evidence your
+  # judge grades severity reliably on YOUR policies.
+  require_severity_match: false
+  include_aux_context: true
+semantic_dedup:
+  enabled: false
+  provider: sentence_transformers
+  model: "BAAI/bge-m3"
+  threshold: 0.90
+  batch_size: 16
+
+# --- output ----------------------------------------------------------------
+output_dir: "../output"
+run_id: null                         # null = UTC timestamp

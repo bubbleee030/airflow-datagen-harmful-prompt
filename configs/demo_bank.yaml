@@ -1,0 +1,14 @@
+# Generality check: a different domain, a different language, and policies that
+# supply ONLY policy_id and policy -- no severity, no examples, no aux documents.
+# Everything else falls back to the built-in defaults.
+policy_file: policies/demo_bank.jsonl
+domain: "Taiwan Commercial Bank online customer service"
+language: "English"
+total: 12
+severity_ratio:
+  low: 1
+  medium: 1
+  high: 1
+model: "Mistral-Large-3-675B-Instruct-2512"
+max_prompts_per_call: 3
+output_dir: "../demo_out"

@@ -1,0 +1,46 @@
+{
+  "run_id": "20260830_200706",
+  "generated_at": "2026-08-30T20:07:13.113223+00:00",
+  "config": {
+    "policy_file": "/home/ubuntu/airflow-datagen-harmful-prompt/configs/policies/demo_bank.jsonl",
+    "domain": "Taiwan Commercial Bank online customer service",
+    "total": 12,
+    "policy_ids": [],
+    "language": "English",
+    "severity_ratio": {
+      "low": 1,
+      "medium": 1,
+      "high": 1
+    },
+    "aux_documents": [],
+    "aux_char_budget": 6000,
+    "model": "Mistral-Large-3-675B-Instruct-2512",
+    "base_url": "https://your-openai-compatible-endpoint/v1",
+    "temperature": 1.0,
+    "max_tokens": 4096,
+    "max_prompts_per_call": 3,
+    "concurrency": 4,
+    "max_retries": 3,
+    "timeout": 300.0,
+    "output_dir": "/home/ubuntu/airflow-datagen-harmful-prompt/demo_out",
+    "run_id": null
+  },
+  "policy_file_sha256": "035eac45f94df9f6cfec75aeb1635631bb82d200bd56c9151ba35d596ac5bedb",
+  "aux_document_sha256": {},
+  "requested": 12,
+  "produced": 12,
+  "api_calls": 6,
+  "failures": 0,
+  "parse_strategies": {
+    "json_fence": 6
+  },
+  "by_severity": {
+    "low": 4,
+    "medium": 4,
+    "high": 4
+  },
+  "by_policy": {
+    "B-FRAUD": 6,
+    "B-LAUNDER": 6
+  }
+}

@@ -1,0 +1,24 @@
+# Generated output. Reproduce with:
+#   python3 -m harmful_prompt.generate run --config configs/example.yaml
+# A representative run is committed under samples/ instead.
+output/
+output_smoke/
+dataset/
+demo_out/
+
+# Secrets -- never commit. Credentials come from the environment.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.vscode/
+.idea/
+.DS_Store
